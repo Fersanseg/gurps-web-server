@@ -1,0 +1,6 @@
+services:
+  back:
+    build: .
+    container_name: gwm-back
+    ports: 
+      - 8080:8080
