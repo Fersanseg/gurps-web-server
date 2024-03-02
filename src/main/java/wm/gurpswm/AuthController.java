@@ -23,7 +23,8 @@ public class AuthController {
     
     @PostMapping(path = "/login")
     public ResponseEntity<ClientResponse> login(@RequestBody UserCredentials body) throws Exception {
-        return new ResponseEntity<>(firebaseLogin(body), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        // return new ResponseEntity<>(firebaseLogin(body), HttpStatus.OK);
     }
 
     private ClientResponse firebaseLogin(UserCredentials credentials) throws Exception {
