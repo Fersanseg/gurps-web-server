@@ -31,7 +31,8 @@ public class AuthController {
         String url = FirebaseConfig.getTokenUrl();
 
         try {
-            return new ClientResponse(RestClient.post(req, url, FirebaseAuthResponse.class, "bar"));
+            return new ClientResponse(true, "asdfasdf");
+            // return new ClientResponse(RestClient.post(req, url, FirebaseAuthResponse.class, "bar"));
         }
         catch (HttpClientErrorException e) {
             String excMessage = e.getMessage();
