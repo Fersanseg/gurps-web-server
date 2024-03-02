@@ -1,10 +1,11 @@
 package wm.gurpswm.Firebase;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -21,8 +22,9 @@ public class FirebaseConfig {
     @PostConstruct
     public void fbInit() throws IOException {
         FirebaseOptions options = null;
-        if (new File("./src/main/resources/firebase-config.json").exists()) {
-            InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("firebase-config.json");
+        Resource configFile = new ClassPathResource("firebase-config.json");
+        if (configFile.exists()) {
+            InputStream serviceAccount = configFile.getInputStream();
             
             options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
