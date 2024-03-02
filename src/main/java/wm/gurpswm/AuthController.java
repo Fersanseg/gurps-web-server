@@ -27,23 +27,24 @@ public class AuthController {
     }
 
     private ClientResponse firebaseLogin(UserCredentials credentials) throws Exception {
-        FirebaseAuthRequest req = new FirebaseAuthRequest(credentials);
-        String url = FirebaseConfig.getTokenUrl();
+        return new ClientResponse(true, "TEST ERROR MESSAGE HELLO");
+        // FirebaseAuthRequest req = new FirebaseAuthRequest(credentials);
+        // String url = FirebaseConfig.getTokenUrl();
 
-        try {
-            return new ClientResponse(true, "asdfasdf");
-            // return new ClientResponse(RestClient.post(req, url, FirebaseAuthResponse.class, "bar"));
-        }
-        catch (HttpClientErrorException e) {
-            String excMessage = e.getMessage();
-            if (excMessage.contains("INVALID_EMAIL")) 
-                return new ClientResponse(true, "Invalid email format");
+        // try {
+        //     return new ClientResponse(true, "asdfasdf");
+        //     // return new ClientResponse(RestClient.post(req, url, FirebaseAuthResponse.class, "bar"));
+        // }
+        // catch (HttpClientErrorException e) {
+        //     String excMessage = e.getMessage();
+        //     if (excMessage.contains("INVALID_EMAIL")) 
+        //         return new ClientResponse(true, "Invalid email format");
             
-            if (excMessage.contains("INVALID_LOGIN_CREDENTIALS")) {
-                return new ClientResponse(true, "Invalid login credentials");
-            }
+        //     if (excMessage.contains("INVALID_LOGIN_CREDENTIALS")) {
+        //         return new ClientResponse(true, "Invalid login credentials");
+        //     }
         
-            throw e;
-        }
+        //     throw e;
+        // }
     }
 }
