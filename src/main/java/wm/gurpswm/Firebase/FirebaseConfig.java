@@ -18,7 +18,7 @@ import jakarta.annotation.PostConstruct;
 public class FirebaseConfig {
     private static final String FB_KEY = "AIzaSyBPymmztNuVSLdjXo1BWyr7dDleE7X9qE4";
     private static final String IDTOOLKIT_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
-//
+
     @PostConstruct
     public void fbInit() throws IOException {
         FirebaseOptions options = null;
