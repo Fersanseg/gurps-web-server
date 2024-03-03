@@ -26,6 +26,14 @@ public class AuthController {
         return new ResponseEntity<>(firebaseLogin(body), HttpStatus.OK);
     }
 
+    @PostMapping("/db/insert")
+    public ResponseEntity<String> postMethodName() {
+        //TODO: process POST request
+        
+        return new ResponseEntity<>("HELLO FROM INSERT ENDPOINT", HttpStatus.OK);
+    }
+    
+
     private ClientResponse firebaseLogin(UserCredentials credentials) throws Exception {
         FirebaseAuthRequest req = new FirebaseAuthRequest(credentials);
         String url = FirebaseConfig.getTokenUrl();
