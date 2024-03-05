@@ -13,19 +13,19 @@ import wm.gurpswm.Firebase.FirebaseAuthenticationFilter;
 @Configuration
 public class WebSecurityConfig {
     
-    @Autowired
-    private FirebaseAuthenticationFilter firebaseAuthenticationFilter;
+  @Autowired
+  private FirebaseAuthenticationFilter firebaseAuthenticationFilter;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> 
-            auth.requestMatchers("/app/db/insert").authenticated()
-            .anyRequest().permitAll()
-        )
-        .addFilterBefore(firebaseAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-        .oauth2ResourceServer(rs -> rs.jwt(Customizer.withDefaults()))
-        ;
-        return http.build();
-    }
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.csrf(csrf -> csrf.disable())
+    .authorizeHttpRequests(auth -> 
+        auth.requestMatchers("/app/db/insert").authenticated()
+        .anyRequest().permitAll()
+    )
+    .addFilterBefore(firebaseAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+    .oauth2ResourceServer(rs -> rs.jwt(Customizer.withDefaults()))
+    ;
+    return http.build();
+  }
 }

@@ -16,29 +16,29 @@ import jakarta.annotation.PostConstruct;
 
 @Configuration
 public class FirebaseConfig {
-    private static final String FB_KEY = "AIzaSyBPymmztNuVSLdjXo1BWyr7dDleE7X9qE4";
-    private static final String IDTOOLKIT_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
-//
-    @PostConstruct
-    public void fbInit() throws IOException {
-        FirebaseOptions options = null;
-        Resource configFile = new ClassPathResource("firebase-config.json");
-        if (configFile.exists()) {
-            InputStream serviceAccount = configFile.getInputStream();
-            
-            options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
-        } else {
-            options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.getApplicationDefault())
-                .build();
-        }
+  private static final String FB_KEY = "AIzaSyBPymmztNuVSLdjXo1BWyr7dDleE7X9qE4";
+  private static final String IDTOOLKIT_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
 
-        FirebaseApp.initializeApp(options);
+  @PostConstruct
+  public void fbInit() throws IOException {
+    FirebaseOptions options = null;
+    Resource configFile = new ClassPathResource("firebase-config.json");
+    if (configFile.exists()) {
+      InputStream serviceAccount = configFile.getInputStream();
+      
+      options = FirebaseOptions.builder()
+        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+        .build();
+    } else {
+        options = FirebaseOptions.builder()
+          .setCredentials(GoogleCredentials.getApplicationDefault())
+          .build();
     }
 
-    public static String getTokenUrl() {
-        return IDTOOLKIT_URL + FB_KEY;
-    }
+    FirebaseApp.initializeApp(options);
+  }
+
+  public static String getTokenUrl() {
+      return IDTOOLKIT_URL + FB_KEY;
+  }
 }
