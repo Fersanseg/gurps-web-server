@@ -11,8 +11,10 @@ import wm.gurpswm.Rest.RestClient;
 import wm.gurpswm.Rest.UserCredentials;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,11 @@ public class AuthController {
     
   @PostMapping(path = "/login")
   public ResponseEntity<ClientResponse> login(@RequestBody UserCredentials body) throws Exception {
-      return new ResponseEntity<>(firebaseLogin(body), HttpStatus.OK);
+    if (StringUtils.hasText(body.getUsername())) { // "username" is a honeypot input. If filled, it's a bot request. Deny automatically
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+    return new ResponseEntity<>(firebaseLogin(body), HttpStatus.OK);
   }
 
   @PostMapping("/db/insert")
